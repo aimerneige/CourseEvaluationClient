@@ -4,7 +4,7 @@
 
 ## Description
 
-PyQt client for university course evaluation..
+PyQt client for university course evaluation.
 
 ## LICENSE
 
