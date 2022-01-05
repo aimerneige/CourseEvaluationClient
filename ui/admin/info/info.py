@@ -9,14 +9,14 @@ from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QPushButton
 
 
-window_title = "Student Manage"
+window_title = "Admin Info"
 window_width = 300
 window_height = 140
 
 button_size = QSize(100, 30)
 
 
-class StudentMainWindow(QMainWindow):
+class AdminInfoWindow(QMainWindow):
     def __init__(self, father):
         super().__init__()
         self.father = father
