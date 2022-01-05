@@ -21,16 +21,10 @@ class AdminMainWindow(QMainWindow):
         self.initUI()
         self.center()
 
-    def initWindow(self) -> None:
-        """
-        Init window properties.
-        """
+    def initWindow(self):
         self.setWindowTitle(window_title)
         self.setFixedWidth(window_width)
         self.setFixedHeight(window_height)
 
-    def initUI(self) -> None:
-        """
-        Init UI widgets and layout.
-        """
+    def initUI(self):
         pass

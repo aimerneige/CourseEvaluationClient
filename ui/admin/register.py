@@ -24,26 +24,17 @@ class AdminRegisterWindow(QMainWindow):
         self.initUI()
         self.center()
 
-    def initWindow(self) -> None:
-        """
-        Init window properties.
-        """
+    def initWindow(self):
         self.setWindowTitle(window_title)
         self.setFixedWidth(window_width)
         self.setFixedHeight(window_height)
 
-    def initUI(self) -> None:
-        """
-        Init UI widgets and layout.
-        """
+    def initUI(self):
         self.initInputWidgets()
         self.initButton()
         self.initLoginWarning()
 
-    def initInputWidgets(self) -> None:
-        """
-        Init input widgets.
-        """
+    def initInputWidgets(self):
         self.nameLabel = QLabel("name:", self)
         self.nameLabel.setFixedSize(QSize(80, 20))
         self.nameLabel.move(10, 20)
@@ -69,10 +60,7 @@ class AdminRegisterWindow(QMainWindow):
         self.passwordInput.move(100, 100)
         self.passwordInput.setEchoMode(QtWidgets.QLineEdit.Password)
 
-    def initButton(self) -> None:
-        """
-        Init button widgets.
-        """
+    def initButton(self):
         self.backButton = QPushButton('Back', self)
         self.backButton.setFixedSize(QSize(80, 30))
         self.backButton.move(10, 140)
@@ -88,10 +76,7 @@ class AdminRegisterWindow(QMainWindow):
         self.registerButton.move(210, 140)
         self.registerButton.clicked.connect(self.registerClicked)
 
-    def initLoginWarning(self) -> None:
-        """
-        Init login warning.
-        """
+    def initLoginWarning(self):
         self.nameLabel.setVisible(False)
         self.nameInput.setVisible(False)
         self.registerButton.setDisabled(True)
@@ -102,10 +87,7 @@ class AdminRegisterWindow(QMainWindow):
         self.warningLabel.setFixedSize(QSize(280, 20))
         self.warningLabel.move(10, 20)
 
-    def closeLoginWarning(self) -> None:
-        """
-        Close login warning.
-        """
+    def closeLoginWarning(self):
         self.nameLabel.setVisible(True)
         self.nameInput.setVisible(True)
 
@@ -123,10 +105,7 @@ class AdminRegisterWindow(QMainWindow):
         self.father.show()
 
     @pyqtSlot()
-    def loginClicked(self) -> None:
-        """
-        Login.
-        """
+    def loginClicked(self):
         username = self.usernameInput.text()
         password = self.passwordInput.text()
         if username == "" or password == "":
@@ -141,10 +120,7 @@ class AdminRegisterWindow(QMainWindow):
             QMessageBox.warning(self, 'Error', response.json()['data'])
 
     @pyqtSlot()
-    def registerClicked(self) -> None:
-        """
-        Register.
-        """
+    def registerClicked(self):
         name = self.nameInput.text()
         username = self.usernameInput.text()
         password = self.passwordInput.text()
@@ -159,10 +135,7 @@ class AdminRegisterWindow(QMainWindow):
         else:
             QMessageBox.warning(self, 'Error', response.json()['data'])
 
-    def center(self) -> None:
-        """
-        Center the window on the screen.
-        """
+    def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)

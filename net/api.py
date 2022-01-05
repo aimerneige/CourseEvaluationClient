@@ -13,7 +13,7 @@ base_url = 'https://tencent.aimerneige.com:21911/course_evaluation'
 
 class Api():
 
-    def __init__(self) -> None:
+    def __init__(self):
         self.root = base_url
         self.admin_url = self.root + '/admin'
         self.course_url = self.root + '/course'

@@ -25,25 +25,16 @@ class AdminLoginWindow(QMainWindow):
         self.initUI()
         self.center()
 
-    def initWindow(self) -> None:
-        """
-        Init window properties.
-        """
+    def initWindow(self):
         self.setWindowTitle(window_title)
         self.setFixedWidth(window_width)
         self.setFixedHeight(window_height)
 
-    def initUI(self) -> None:
-        """
-        Init UI widgets and layout.
-        """
+    def initUI(self):
         self.initInputWidgets()
         self.initButton()
 
-    def initInputWidgets(self) -> None:
-        """
-        Init input widgets.
-        """
+    def initInputWidgets(self):
         self.usernameLabel = QLabel("username:", self)
         self.usernameLabel.setFixedSize(QSize(80, 20))
         self.usernameLabel.move(10, 20)
@@ -61,10 +52,7 @@ class AdminLoginWindow(QMainWindow):
         self.passwordInput.move(100, 60)
         self.passwordInput.setEchoMode(QtWidgets.QLineEdit.Password)
 
-    def initButton(self) -> None:
-        """
-        Init button widgets.
-        """
+    def initButton(self):
         self.backButton = QPushButton("Back", self)
         self.backButton.setFixedSize(QSize(80, 30))
         self.backButton.move(10, 100)
@@ -86,10 +74,7 @@ class AdminLoginWindow(QMainWindow):
         self.father.show()
 
     @pyqtSlot()
-    def loginClicked(self) -> None:
-        """
-        Login.
-        """
+    def loginClicked(self):
         username = self.usernameInput.text()
         password = self.passwordInput.text()
         if username == "" or password == "":
@@ -105,18 +90,12 @@ class AdminLoginWindow(QMainWindow):
             QMessageBox.warning(self, 'Error', response.json()['data'])
 
     @pyqtSlot()
-    def registerClicked(self) -> None:
-        """
-        Register.
-        """
+    def registerClicked(self):
         self.close()
         self.adminRegisterWindow = AdminRegisterWindow(self)
         self.adminRegisterWindow.show()
 
-    def center(self) -> None:
-        """
-        Center the window on the screen.
-        """
+    def center(self):
         qr = self.frameGeometry()
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
