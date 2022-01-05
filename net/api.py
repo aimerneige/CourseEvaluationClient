@@ -95,6 +95,11 @@ class Api():
         response = requests.delete(self.course_url + '/' + str(id))
         return response
 
+    def get_all_students_by_course_id(self, course_id):
+        response = requests.get(
+            self.course_url + '/' + str(course_id) + '/students')
+        return response
+
     def add_student_to_course(self, course_id, student_id):
         response = requests.post(
             self.course_url + '/' + str(course_id) + '/student', params={'studentId': student_id})
