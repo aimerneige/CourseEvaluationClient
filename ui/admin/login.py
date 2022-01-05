@@ -10,6 +10,7 @@ from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton
 
 from net.api import Api
+from ui.admin.register import AdminRegisterWindow
 
 window_title = "Admin Login"
 window_width = 300
@@ -93,7 +94,9 @@ class AdminLoginWindow(QMainWindow):
         """
         Register.
         """
-        pass
+        self.close()
+        self.adminRegisterWindow = AdminRegisterWindow()
+        self.adminRegisterWindow.show()
 
     def center(self) -> None:
         """
