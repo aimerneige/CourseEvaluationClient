@@ -24,6 +24,7 @@ class AdminLoginWindow(QMainWindow):
     def __init__(self, father) -> None:
         super().__init__()
         self.father = father
+        self.adminId = 0
         self.initWindow()
         self.initUI()
         self.center()
@@ -87,6 +88,7 @@ class AdminLoginWindow(QMainWindow):
         api = Api()
         response = api.admin_login(username, password)
         if response.json()['message'] == 'success':
+            self.adminId = response.json()['data']['id']
             self.close()
             self.adminMainWindow = AdminMainWindow(self)
             self.adminMainWindow.show()

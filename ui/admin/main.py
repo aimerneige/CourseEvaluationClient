@@ -26,6 +26,7 @@ class AdminMainWindow(QMainWindow):
     def __init__(self, father):
         super().__init__()
         self.father = father
+        self.adminId = father.adminId
         self.initWindow()
         self.initUI()
         self.center()
