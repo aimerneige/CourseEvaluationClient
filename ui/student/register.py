@@ -14,7 +14,7 @@ from net.api import Api
 
 window_title = "Student Register"
 window_width = 300
-window_height = 380
+window_height = 370
 
 
 class StudentRegisterWindow(QMainWindow):
@@ -101,23 +101,23 @@ class StudentRegisterWindow(QMainWindow):
         self.verifyCodeLabel.move(10, 290)
 
         self.verifyCodeInput = QLineEdit(self)
-        self.verifyCodeInput.setFixedSize(QSize(190, 30))
+        self.verifyCodeInput.setFixedSize(QSize(100, 30))
         self.verifyCodeInput.move(100, 290)
 
     def initButton(self):
         self.backButton = QPushButton('Back', self)
-        self.backButton.setFixedSize(QSize(80, 30))
+        self.backButton.setFixedSize(QSize(120, 30))
         self.backButton.move(10, 330)
         self.backButton.clicked.connect(self.backButtonClicked)
 
-        self.verifyButton = QPushButton('Verify', self)
-        self.verifyButton.setFixedSize(QSize(80, 30))
-        self.verifyButton.move(110, 330)
-        self.verifyButton.clicked.connect(self.verifyClicked)
+        self.sendMailButton = QPushButton('Send Mail', self)
+        self.sendMailButton.setFixedSize(QSize(80, 30))
+        self.sendMailButton.move(210, 290)
+        self.sendMailButton.clicked.connect(self.sendMailClicked)
 
         self.registerButton = QPushButton('Register', self)
-        self.registerButton.setFixedSize(QSize(80, 30))
-        self.registerButton.move(210, 330)
+        self.registerButton.setFixedSize(QSize(120, 30))
+        self.registerButton.move(170, 330)
         self.registerButton.clicked.connect(self.registerClicked)
 
     @pyqtSlot()
@@ -126,7 +126,7 @@ class StudentRegisterWindow(QMainWindow):
         self.father.show()
 
     @pyqtSlot()
-    def verifyClicked(self):
+    def sendMailClicked(self):
         email = self.emailInput.text()
         if email == "":
             QMessageBox.warning(self, "Warning", "Please input mail.")
