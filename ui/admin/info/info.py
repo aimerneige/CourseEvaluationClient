@@ -85,12 +85,12 @@ class AdminInfoWindow(QMainWindow):
         self.nameInput.setText(data['name'])
         self.usernameInput.setText(data['username'])
 
-    @ pyqtSlot()
+    @pyqtSlot()
     def backButtonClicked(self):
         self.close()
         self.father.show()
 
-    @ pyqtSlot()
+    @pyqtSlot()
     def saveButtonClicked(self):
         name = self.nameInput.text()
         username = self.usernameInput.text()
