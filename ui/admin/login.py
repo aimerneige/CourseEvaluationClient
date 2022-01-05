@@ -16,7 +16,7 @@ window_width = 300
 window_height = 140
 
 
-class AdminLoginPage(QMainWindow):
+class AdminLoginWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.initWindow()
