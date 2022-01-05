@@ -6,9 +6,10 @@
 
 
 from PyQt5.QtCore import QSize, pyqtSlot
-from PyQt5.QtWidgets import QCheckBox, QComboBox, QDesktopWidget, QLabel, QListWidget, QMainWindow, QMessageBox, QPlainTextEdit, QPushButton, QLineEdit
+from PyQt5.QtWidgets import QComboBox, QDesktopWidget, QLabel, QListWidget, QMainWindow, QMessageBox, QPlainTextEdit, QPushButton, QLineEdit
 
 from net.api import Api
+from ui.admin.course.student import InsertStudentWindow
 
 
 window_title = "Course Manage"
@@ -24,6 +25,7 @@ class CourseMainWindow(QMainWindow):
     def __init__(self, father):
         super().__init__()
         self.father = father
+        self.courseId = 0
         self.initWindow()
         self.initUI()
         self.center()
@@ -120,12 +122,13 @@ class CourseMainWindow(QMainWindow):
         self.studentNewButton = QPushButton("New", self)
         self.studentNewButton.setFixedSize(QSize(70, 30))
         self.studentNewButton.move(470, 260)
-        # self.studentNewButton.clicked.connect(self.studentNewButtonClicked)
+        self.studentNewButton.clicked.connect(self.studentNewButtonClicked)
 
         self.studentDeleteButton = QPushButton("Delete", self)
         self.studentDeleteButton.setFixedSize(QSize(70, 30))
         self.studentDeleteButton.move(550, 260)
-        # self.studentDeleteButton.clicked.connect(self.studentDeleteButtonClicked)
+        self.studentDeleteButton.clicked.connect(
+            self.studentDeleteButtonClicked)
 
         self.backButton = QPushButton("Back", self)
         self.backButton.setFixedSize(QSize(70, 30))
@@ -138,8 +141,7 @@ class CourseMainWindow(QMainWindow):
         api = Api()
         response = api.get_all_course()
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " +
-                                response.json()['data'])
+            QMessageBox.warning(self, "Error", response.json()['data'])
             return
         course_list = response.json()['data']
         for course in course_list:
@@ -152,8 +154,7 @@ class CourseMainWindow(QMainWindow):
         api = Api()
         response = api.get_all_teacher()
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " +
-                                response.json()['data'])
+            QMessageBox.warning(self, "Error", response.json()['data'])
             return
         teacher_list = response.json()['data']
         for teacher in teacher_list:
@@ -169,24 +170,22 @@ class CourseMainWindow(QMainWindow):
         api = Api()
         response = api.get_all_students_by_course_id(course_id)
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " +
-                                response.json()['data'])
+            QMessageBox.warning(self, "Error", response.json()['data'])
             return
         student_list = response.json()['data']
         for student in student_list:
             g_student_list.append(student)
             self.studentList.insertItem(student['id'], student['name'])
-        # todo check if right
 
     @pyqtSlot()
     def courseListClicked(self):
         index = self.courseList.currentRow()
         course_id = g_course_list[index]['id']
+        self.courseId = course_id
         api = Api()
         response = api.get_course_by_id(course_id)
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " +
-                                response.json()['data'])
+            QMessageBox.warning(self, "Error", response.json()['data'])
             return
         data = response.json()['data']
         title = data['title']
@@ -211,8 +210,7 @@ class CourseMainWindow(QMainWindow):
         api = Api()
         response = api.search_course_by_title(keyword)
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " +
-                                response.json()['data'])
+            QMessageBox.warning(self, "Error", response.json()['data'])
             return
         course_list = response.json()['data']
         g_course_list.clear()
@@ -249,8 +247,7 @@ class CourseMainWindow(QMainWindow):
         api = Api()
         response = api.create_new_course(title, description, teacher_id)
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " +
-                                response.json()['data'])
+            QMessageBox.warning(self, "Error", response.json()['data'])
             return
         QMessageBox.information(
             self, "Success", "Create new course successfully.")
@@ -268,8 +265,7 @@ class CourseMainWindow(QMainWindow):
         response = api.update_course_by_id(
             course_id, title, description, teacher_id)
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " +
-                                response.json()['data'])
+            QMessageBox.warning(self, "Error", response.json()['data'])
             return
         QMessageBox.information(
             self, "Success", "Save New Course Successfully.")
@@ -282,10 +278,29 @@ class CourseMainWindow(QMainWindow):
         api = Api()
         response = api.delete_course_by_id(course_id)
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " +
-                                response.json()['data'])
+            QMessageBox.warning(self, "Error", response.json()['data'])
             return
         self.updateUI()
+
+    @pyqtSlot()
+    def studentNewButtonClicked(self):
+        self.insertStudentWindow = InsertStudentWindow(self)
+        self.insertStudentWindow.show()
+
+    @pyqtSlot()
+    def studentDeleteButtonClicked(self):
+        course_index = self.courseList.currentRow()
+        course_id = g_course_list[course_index]['id']
+        student_index = self.studentList.currentRow()
+        student_id = g_student_list[student_index]['id']
+        api = Api()
+        response = api.delete_student_from_course(course_id, student_id)
+        if response.json()['message'] != 'success':
+            QMessageBox.warning(self, "Error", response.json()['data'])
+            return
+        QMessageBox.information(
+            self, "Success", "Delete student successfully.")
+        self.updateStudentData()
 
     @pyqtSlot()
     def backButtonClicked(self):
