@@ -9,6 +9,7 @@ from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QPushButton
 
 from ui.admin.login import AdminLoginWindow
+from ui.student.login import StudentLoginWindow
 
 
 window_title = "Course Evaluation"
@@ -58,4 +59,6 @@ class Window(QMainWindow):
 
     @pyqtSlot()
     def studentLoginClicked(self):
-        pass
+        self.close()
+        self.studentLoginWindow = StudentLoginWindow(self)
+        self.studentLoginWindow.show()
