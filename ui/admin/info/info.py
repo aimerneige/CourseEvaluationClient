@@ -78,18 +78,19 @@ class AdminInfoWindow(QMainWindow):
         api = Api()
         response = api.get_admin_by_id(self.adminId)
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Error: " + response['message'])
+            QMessageBox.warning(self, "Error", "Error: " +
+                                response.json()['data'])
             return
         data = response.json()['data']
         self.nameInput.setText(data['name'])
         self.usernameInput.setText(data['username'])
 
-    @pyqtSlot()
+    @ pyqtSlot()
     def backButtonClicked(self):
         self.close()
         self.father.show()
 
-    @pyqtSlot()
+    @ pyqtSlot()
     def saveButtonClicked(self):
         name = self.nameInput.text()
         username = self.usernameInput.text()
