@@ -18,6 +18,7 @@ from ui.admin.teacher.teacher import TeacherMainWindow
 window_title = "Admin Manage"
 window_width = 300
 window_height = 130
+
 button_size = QSize(100, 30)
 
 

@@ -16,6 +16,7 @@ from ui.admin.register import AdminRegisterWindow
 window_title = "Admin Login"
 window_width = 300
 window_height = 140
+
 button_size = QSize(80, 30)
 
 
