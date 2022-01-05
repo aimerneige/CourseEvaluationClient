@@ -161,7 +161,7 @@ class CourseMainWindow(QMainWindow):
             self.teacherComb.insertItem(teacher['id'], teacher['name'])
         self.teacherComb.setCurrentIndex(-1)
 
-    @ pyqtSlot()
+    @pyqtSlot()
     def courseListClicked(self):
         index = self.courseList.currentRow()
         course_id = g_course_list[index]['id']
@@ -184,7 +184,7 @@ class CourseMainWindow(QMainWindow):
                 break
             index += 1
 
-    @ pyqtSlot()
+    @pyqtSlot()
     def searchButtonClicked(self):
         keyword = self.searchInput.text()
         if keyword == '':
@@ -203,18 +203,18 @@ class CourseMainWindow(QMainWindow):
             g_course_list.append(course)
             self.courseList.insertItem(course['id'], course['title'])
 
-    @ pyqtSlot()
+    @pyqtSlot()
     def resetButtonClicked(self):
         self.searchInput.setText('')
         self.updateCourseData()
 
-    @ pyqtSlot()
+    @pyqtSlot()
     def clearButtonClicked(self):
         self.titleInput.setText('')
         self.descriptionInput.setPlainText('')
         self.teacherComb.setCurrentIndex(-1)
 
-    @ pyqtSlot()
+    @pyqtSlot()
     def newButtonClicked(self):
         title = self.titleInput.text()
         description = self.descriptionInput.toPlainText()
