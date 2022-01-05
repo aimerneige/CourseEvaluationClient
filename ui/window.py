@@ -71,7 +71,7 @@ class Window(QMainWindow):
         Admin login button clicked.
         """
         self.close()
-        self.adminLoginWindow = AdminLoginWindow()
+        self.adminLoginWindow = AdminLoginWindow(self)
         self.adminLoginWindow.show()
 
     @pyqtSlot()

@@ -18,8 +18,9 @@ window_height = 140
 
 
 class AdminLoginWindow(QMainWindow):
-    def __init__(self) -> None:
+    def __init__(self, father) -> None:
         super().__init__()
+        self.father = father
         self.initWindow()
         self.initUI()
         self.center()
@@ -64,15 +65,25 @@ class AdminLoginWindow(QMainWindow):
         """
         Init button widgets.
         """
+        self.backButton = QPushButton("Back", self)
+        self.backButton.setFixedSize(QSize(80, 30))
+        self.backButton.move(10, 100)
+        self.backButton.clicked.connect(self.backButtonClicked)
+
         self.loginButton = QPushButton('Login', self)
-        self.loginButton.setFixedSize(QSize(100, 30))
-        self.loginButton.move(20, 100)
+        self.loginButton.setFixedSize(QSize(80, 30))
+        self.loginButton.move(110, 100)
         self.loginButton.clicked.connect(self.loginClicked)
 
         self.registerButton = QPushButton('Register', self)
-        self.registerButton.setFixedSize(QSize(100, 30))
-        self.registerButton.move(180, 100)
+        self.registerButton.setFixedSize(QSize(80, 30))
+        self.registerButton.move(210, 100)
         self.registerButton.clicked.connect(self.registerClicked)
+
+    @pyqtSlot()
+    def backButtonClicked(self) -> None:
+        self.close()
+        self.father.show()
 
     @pyqtSlot()
     def loginClicked(self) -> None:
@@ -81,6 +92,10 @@ class AdminLoginWindow(QMainWindow):
         """
         username = self.usernameInput.text()
         password = self.passwordInput.text()
+        if username == "" or password == "":
+            QMessageBox.warning(
+                self, "Warning", "Please enter username and password.")
+            return
         api = Api()
         response = api.admin_login(username, password)
         if response.json()['message'] == 'success':
@@ -95,7 +110,7 @@ class AdminLoginWindow(QMainWindow):
         Register.
         """
         self.close()
-        self.adminRegisterWindow = AdminRegisterWindow()
+        self.adminRegisterWindow = AdminRegisterWindow(self)
         self.adminRegisterWindow.show()
 
     def center(self) -> None:

@@ -32,7 +32,7 @@ class Api():
             'username': username,
             'password': password
         }
-        response = requests.post(self.admin_url, data=data)
+        response = requests.post(self.admin_url, json=data)
         return response
 
     def get_admin_by_id(self, id):
