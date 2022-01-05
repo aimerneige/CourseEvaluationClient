@@ -45,7 +45,7 @@ class Api():
             'username': username,
             'password': password
         }
-        response = requests.put(self.admin_url + '/' + str(id), data=data)
+        response = requests.put(self.admin_url + '/' + str(id), json=data)
         return response
 
     def delete_admin(self, id):
@@ -73,7 +73,7 @@ class Api():
             "description": description,
             "teacherId": teacher_id
         }
-        response = requests.post(self.course_url, data=data)
+        response = requests.post(self.course_url, json=data)
         return response
 
     def get_course_by_id(self, id):
@@ -86,7 +86,7 @@ class Api():
             "description": description,
             "teacherId": teacher_id
         }
-        response = requests.put(self.course_url + '/' + str(id), data=data)
+        response = requests.put(self.course_url + '/' + str(id), json=data)
         return response
 
     def delete_course_by_id(self, id):
@@ -117,7 +117,7 @@ class Api():
             "studentId": student_id,
             "courseId": course_id
         }
-        response = requests.post(self.evaluation_url, data=data)
+        response = requests.post(self.evaluation_url, json=data)
         return response
 
     def get_evaluation_by_id(self, id):
@@ -129,7 +129,7 @@ class Api():
             "studentId": student_id,
             "courseId": course_id
         }
-        response = requests.put(self.evaluation_url + '/' + str(id), data=data)
+        response = requests.put(self.evaluation_url + '/' + str(id), json=data)
         return response
 
     def delete_evaluation_by_id(self, id):
@@ -145,7 +145,7 @@ class Api():
             "content": content,
             "evaluationId": evaluation_id
         }
-        response = requests.post(self.praise_url, data=data)
+        response = requests.post(self.praise_url, json=data)
         return response
 
     def get_praise_by_id(self, id):
@@ -157,7 +157,7 @@ class Api():
             "content": content,
             "evaluationId": evaluation_id
         }
-        response = requests.put(self.praise_url + '/' + str(id), data=data)
+        response = requests.put(self.praise_url + '/' + str(id), json=data)
         return response
 
     def delete_praise_by_id(self, id):
@@ -174,7 +174,7 @@ class Api():
             "score": score,
             "evaluationId": evaluation_id
         }
-        response = requests.post(self.question_url, data=data)
+        response = requests.post(self.question_url, json=data)
         return response
 
     def get_question_by_id(self, id):
@@ -187,7 +187,7 @@ class Api():
             "score": score,
             "evaluationId": evaluation_id
         }
-        response = requests.put(self.question_url + '/' + str(id), data=data)
+        response = requests.put(self.question_url + '/' + str(id), json=data)
         return response
 
     def delete_question_by_id(self, id):
@@ -208,7 +208,7 @@ class Api():
             "password": password,
             "age": age
         }
-        response = requests.post(self.student_url, data=data)
+        response = requests.post(self.student_url, json=data)
         return response
 
     def get_student_by_id(self, id):
@@ -225,7 +225,7 @@ class Api():
             "password": password,
             "age": age
         }
-        response = requests.put(self.student_url + '/' + str(id), data=data)
+        response = requests.put(self.student_url + '/' + str(id), json=data)
         return response
 
     def delete_student_by_id(self, id):
@@ -254,7 +254,7 @@ class Api():
             "sex": sex,
             "age": age
         }
-        response = requests.post(self.teacher_url, data=data)
+        response = requests.post(self.teacher_url, json=data)
         return response
 
     def get_teacher_by_id(self, id):
@@ -269,7 +269,7 @@ class Api():
             "sex": sex,
             "age": age
         }
-        response = requests.put(self.teacher_url, data=data)
+        response = requests.put(self.teacher_url, json=data)
         return response
 
     def delete_teacher_by_id(self, id):
