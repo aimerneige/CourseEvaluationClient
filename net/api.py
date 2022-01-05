@@ -10,7 +10,7 @@ import requests
 base_url = 'https://tencent.aimerneige.com:21911/course_evaluation'
 
 
-class WebRequests():
+class Api():
 
     def __init__(self) -> None:
         self.root = base_url

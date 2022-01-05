@@ -9,7 +9,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton
 
-from net.web_requests import WebRequests
+from net.api import Api
 
 window_title = "Admin Login"
 window_width = 300
@@ -80,8 +80,8 @@ class AdminLoginWindow(QMainWindow):
         """
         username = self.usernameInput.text()
         password = self.passwordInput.text()
-        web_requests = WebRequests()
-        response = web_requests.admin_login(username, password)
+        api = Api()
+        response = api.admin_login(username, password)
         if response.json()['message'] == 'success':
             self.close()
             # todo start manage page
