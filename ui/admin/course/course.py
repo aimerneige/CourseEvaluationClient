@@ -200,6 +200,7 @@ class CourseMainWindow(QMainWindow):
                 self.teacherComb.setCurrentIndex(index)
                 break
             index += 1
+        self.updateStudentData()
 
     @pyqtSlot()
     def searchButtonClicked(self):
