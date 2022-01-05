@@ -70,7 +70,6 @@ class Window(QMainWindow):
         """
         Admin login button clicked.
         """
-        print('admin login')
         self.close()
         self.adminLoginPage = AdminLoginPage()
         self.adminLoginPage.show()
@@ -80,4 +79,4 @@ class Window(QMainWindow):
         """
         Student login button clicked.
         """
-        print('student login')
+        pass
