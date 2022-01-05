@@ -16,6 +16,7 @@ from ui.admin.register import AdminRegisterWindow
 window_title = "Admin Login"
 window_width = 300
 window_height = 140
+button_size = QSize(80, 30)
 
 
 class AdminLoginWindow(QMainWindow):
@@ -55,17 +56,17 @@ class AdminLoginWindow(QMainWindow):
 
     def initButton(self):
         self.backButton = QPushButton("Back", self)
-        self.backButton.setFixedSize(QSize(80, 30))
+        self.backButton.setFixedSize(button_size)
         self.backButton.move(10, 100)
         self.backButton.clicked.connect(self.backButtonClicked)
 
         self.loginButton = QPushButton('Login', self)
-        self.loginButton.setFixedSize(QSize(80, 30))
+        self.loginButton.setFixedSize(button_size)
         self.loginButton.move(110, 100)
         self.loginButton.clicked.connect(self.loginClicked)
 
         self.registerButton = QPushButton('Register', self)
-        self.registerButton.setFixedSize(QSize(80, 30))
+        self.registerButton.setFixedSize(button_size)
         self.registerButton.move(210, 100)
         self.registerButton.clicked.connect(self.registerClicked)
 
