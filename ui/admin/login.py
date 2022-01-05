@@ -7,23 +7,38 @@
 
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QSize, pyqtSlot
-from PyQt5.QtWidgets import QDesktopWidget, QLabel, QLineEdit, QMessageBox, QPushButton, QWidget
+from PyQt5.QtWidgets import QDesktopWidget, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton
 
-from net.web_requsets import WebRequests
+from net.web_requests import WebRequests
+
+window_title = "Admin Login"
+window_width = 300
+window_height = 140
 
 
-class AdminLogin(QWidget):
+class AdminLoginPage(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
-        self.setFixedSize(300, 140)
+        self.initWindow()
         self.initUI()
         self.center()
 
+    def initWindow(self) -> None:
+        """
+        Init window properties.
+        """
+        self.setWindowTitle(window_title)
+        self.setFixedWidth(window_width)
+        self.setFixedHeight(window_height)
+
     def initUI(self) -> None:
-        self.initInput()
+        """
+        Init UI widgets and layout.
+        """
+        self.initInputWidgets()
         self.initButton()
 
-    def initInput(self) -> None:
+    def initInputWidgets(self) -> None:
         """
         Init input widgets.
         """
@@ -58,7 +73,6 @@ class AdminLogin(QWidget):
         self.registerButton.move(180, 100)
         self.registerButton.clicked.connect(self.registerClicked)
 
-
     @pyqtSlot()
     def loginClicked(self) -> None:
         """
@@ -66,8 +80,8 @@ class AdminLogin(QWidget):
         """
         username = self.usernameInput.text()
         password = self.passwordInput.text()
-        web_requsets = WebRequests()
-        response = web_requsets.admin_login(username, password)
+        web_requests = WebRequests()
+        response = web_requests.admin_login(username, password)
         if response.json()['message'] == 'success':
             self.close()
             # todo start manage page

@@ -8,7 +8,7 @@
 from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QPushButton
 
-from ui.admin.login import AdminLogin
+from ui.admin.login import AdminLoginPage
 
 
 window_title = "Course Evaluation"
@@ -72,7 +72,7 @@ class Window(QMainWindow):
         """
         print('admin login')
         self.close()
-        self.adminLoginPage = AdminLogin()
+        self.adminLoginPage = AdminLoginPage()
         self.adminLoginPage.show()
 
     @pyqtSlot()

@@ -5,9 +5,7 @@
 # LICENSE: AGPLv3 (https://www.gnu.org/licenses/agpl-3.0.txt)
 
 
-import json
 import requests
-from requests.models import Response
 
 base_url = 'https://tencent.aimerneige.com:21911/course_evaluation'
 
