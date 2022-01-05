@@ -198,7 +198,7 @@ class Api():
         response = requests.get(self.student_url)
         return response
 
-    def create_new_student(self, id_number, name, phone, sex, email, password, age):
+    def create_new_student(self, id_number, name, phone, sex, email, password, age, verify_code):
         data = {
             "idNumber": id_number,
             "name": name,
@@ -206,7 +206,8 @@ class Api():
             "sex": sex,
             "email": email,
             "password": password,
-            "age": age
+            "age": age,
+            "verifyCode": verify_code
         }
         response = requests.post(self.student_url, json=data)
         return response
