@@ -5,7 +5,10 @@
 # LICENSE: AGPLv3 (https://www.gnu.org/licenses/agpl-3.0.txt)
 
 
-from PyQt5.QtWidgets import QDesktopWidget, QMainWindow
+from PyQt5.QtCore import QSize, pyqtSlot
+from PyQt5.QtWidgets import QDesktopWidget, QMainWindow, QPushButton
+
+from ui.admin.login import AdminLogin
 
 
 window_title = "Course Evaluation"
@@ -32,7 +35,26 @@ class Window(QMainWindow):
         """
         Init UI widgets and layout.
         """
-        pass
+        self.initAdminButton()
+        self.initStudentButton()
+
+    def initAdminButton(self) -> None:
+        """
+        Init admin button.
+        """
+        self.adminLoginButton = QPushButton("Admin Login", self)
+        self.adminLoginButton.setFixedSize(QSize(120, 40))
+        self.adminLoginButton.move(80, 55)
+        self.adminLoginButton.clicked.connect(self.adminLoginClicked)
+
+    def initStudentButton(self) -> None:
+        """
+        Init student button.
+        """
+        self.studentLoginButton = QPushButton("Student Login", self)
+        self.studentLoginButton.setFixedSize(QSize(120, 40))
+        self.studentLoginButton.move(80, 105)
+        self.studentLoginButton.clicked.connect(self.studentLoginClicked)
 
     def center(self) -> None:
         """
@@ -42,3 +64,20 @@ class Window(QMainWindow):
         cp = QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
+
+    @pyqtSlot()
+    def adminLoginClicked(self) -> None:
+        """
+        Admin login button clicked.
+        """
+        print('admin login')
+        self.close()
+        self.adminLoginPage = AdminLogin(self)
+        self.adminLoginPage.show()
+
+    @pyqtSlot()
+    def studentLoginClicked(self) -> None:
+        """
+        Student login button clicked.
+        """
+        print('student login')
