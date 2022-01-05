@@ -161,6 +161,23 @@ class CourseMainWindow(QMainWindow):
             self.teacherComb.insertItem(teacher['id'], teacher['name'])
         self.teacherComb.setCurrentIndex(-1)
 
+    def updateStudentData(self):
+        g_student_list.clear()
+        self.studentList.clear()
+        course_index = self.courseList.currentRow()
+        course_id = g_course_list[course_index]['id']
+        api = Api()
+        response = api.get_all_students_by_course_id(course_id)
+        if response.json()['message'] != 'success':
+            QMessageBox.warning(self, "Error", "Error: " +
+                                response.json()['data'])
+            return
+        student_list = response.json()['data']
+        for student in student_list:
+            g_student_list.append(student)
+            self.studentList.insertItem(student['id'], student['name'])
+        # todo check if right
+
     @pyqtSlot()
     def courseListClicked(self):
         index = self.courseList.currentRow()
