@@ -6,6 +6,7 @@
 
 
 import requests
+from requests.models import Response
 
 base_url = 'https://tencent.aimerneige.com:21911/course_evaluation'
 
@@ -21,6 +22,7 @@ class Api():
         self.question_url = self.root + '/question'
         self.student_url = self.root + '/student'
         self.teacher_url = self.root + '/teacher'
+        self.mail_url = self.root + '/mail'
 
     def get_all_admin(self):
         response = requests.get(self.admin_url)
@@ -280,4 +282,11 @@ class Api():
     def search_teacher_by_name(self, name):
         response = requests.get(
             self.teacher_url + '/search', params={'name': name})
+        return response
+
+    def send_verify_mail(self, to):
+        data = {
+            "to": to
+        }
+        response = requests.post(self.mail_url, json=data)
         return response
