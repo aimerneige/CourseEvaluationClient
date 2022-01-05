@@ -13,7 +13,7 @@ from ui.admin.login import AdminLogin
 
 window_title = "Course Evaluation"
 window_width = 300
-window_height = 200
+window_height = 140
 
 
 class Window(QMainWindow):
@@ -44,7 +44,7 @@ class Window(QMainWindow):
         """
         self.adminLoginButton = QPushButton("Admin Login", self)
         self.adminLoginButton.setFixedSize(QSize(120, 40))
-        self.adminLoginButton.move(80, 55)
+        self.adminLoginButton.move(80, 20)
         self.adminLoginButton.clicked.connect(self.adminLoginClicked)
 
     def initStudentButton(self) -> None:
@@ -53,7 +53,7 @@ class Window(QMainWindow):
         """
         self.studentLoginButton = QPushButton("Student Login", self)
         self.studentLoginButton.setFixedSize(QSize(120, 40))
-        self.studentLoginButton.move(80, 105)
+        self.studentLoginButton.move(80, 80)
         self.studentLoginButton.clicked.connect(self.studentLoginClicked)
 
     def center(self) -> None:
@@ -72,7 +72,7 @@ class Window(QMainWindow):
         """
         print('admin login')
         self.close()
-        self.adminLoginPage = AdminLogin(self)
+        self.adminLoginPage = AdminLogin()
         self.adminLoginPage.show()
 
     @pyqtSlot()
