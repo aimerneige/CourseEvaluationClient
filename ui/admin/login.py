@@ -21,7 +21,7 @@ button_size = QSize(80, 30)
 
 
 class AdminLoginWindow(QMainWindow):
-    def __init__(self, father) -> None:
+    def __init__(self, father):
         super().__init__()
         self.father = father
         self.adminId = 0
