@@ -10,8 +10,7 @@ from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton
 
 from net.api import Api
-from ui.admin.main import AdminMainWindow
-from ui.admin.register import AdminRegisterWindow
+from ui.student.register import StudentRegisterWindow
 
 
 window_title = "Student Login"
@@ -98,7 +97,8 @@ class StudentLoginWindow(QMainWindow):
     @pyqtSlot()
     def registerClicked(self):
         self.close()
-        # todo start register window
+        self.studentRegisterWindow = StudentRegisterWindow(self)
+        self.studentRegisterWindow.show()
 
     def center(self):
         qr = self.frameGeometry()
