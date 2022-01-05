@@ -7,8 +7,11 @@
 
 import requests
 from requests.models import Response
+from requests.sessions import Session
 
 base_url = 'https://tencent.aimerneige.com:21911/course_evaluation'
+
+s = Session()
 
 
 class Api():
@@ -216,7 +219,7 @@ class Api():
             "age": age,
             "verifyCode": verify_code
         }
-        response = requests.post(self.student_url, json=data)
+        response = s.post(self.student_url, json=data)
         return response
 
     def get_student_by_id(self, id):
@@ -293,5 +296,5 @@ class Api():
         data = {
             "to": to
         }
-        response = requests.post(self.mail_url, json=data)
+        response = s.post(self.mail_url, json=data)
         return response
