@@ -10,6 +10,7 @@ from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton
 
 from net.api import Api
+from ui.admin.main import AdminMainWindow
 from ui.admin.register import AdminRegisterWindow
 
 window_title = "Admin Login"
@@ -85,7 +86,8 @@ class AdminLoginWindow(QMainWindow):
         response = api.admin_login(username, password)
         if response.json()['message'] == 'success':
             self.close()
-            # todo start manage page
+            self.adminMainWindow = AdminMainWindow(self)
+            self.adminMainWindow.show()
         else:
             QMessageBox.warning(self, 'Error', response.json()['data'])
 

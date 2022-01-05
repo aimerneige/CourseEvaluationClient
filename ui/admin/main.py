@@ -5,7 +5,7 @@
 # LICENSE: AGPLv3 (https://www.gnu.org/licenses/agpl-3.0.txt)
 
 
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QDesktopWidget, QMainWindow
 
 
 window_title = "Admin Manage"
@@ -28,3 +28,9 @@ class AdminMainWindow(QMainWindow):
 
     def initUI(self):
         pass
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
