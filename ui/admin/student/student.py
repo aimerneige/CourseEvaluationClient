@@ -146,28 +146,17 @@ class StudentMainWindow(QMainWindow):
 
     def initCourseWidgets(self):
         self.courseLabel = QLabel("Courses:", self)
-        self.courseLabel.setFixedSize(QSize(80, 20))
+        self.courseLabel.setFixedSize(QSize(80, 30))
         self.courseLabel.move(500, 10)
-
-        self.courseList = QListWidget(self)
-        self.courseList.setFixedSize(QSize(240, 240))
-        self.courseList.move(500, 40)
-
-        self.courseNewButton = QPushButton("New", self)
-        self.courseNewButton.setFixedSize(QSize(70, 30))
-        self.courseNewButton.move(500, 290)
-        self.courseNewButton.clicked.connect(self.courseNewButtonClicked)
-
-        self.courseDeleteButton = QPushButton("Delete", self)
-        self.courseDeleteButton.setFixedSize(QSize(70, 30))
-        self.courseDeleteButton.move(580, 290)
-        self.courseDeleteButton.clicked.connect(
-            self.courseDeleteButtonClicked)
 
         self.backButton = QPushButton("Back", self)
         self.backButton.setFixedSize(QSize(70, 30))
-        self.backButton.move(670, 290)
+        self.backButton.move(670, 10)
         self.backButton.clicked.connect(self.backButtonClicked)
+
+        self.courseList = QListWidget(self)
+        self.courseList.setFixedSize(QSize(240, 270))
+        self.courseList.move(500, 50)
 
     def updateStudentData(self):
         g_student_list.clear()
@@ -335,14 +324,6 @@ class StudentMainWindow(QMainWindow):
         QMessageBox.information(
             self, "Success", "Delete Student Successfully.")
         self.updateUI()
-
-    @pyqtSlot()
-    def courseNewButtonClicked(self):
-        print("studentNewButtonClicked")
-
-    @pyqtSlot()
-    def courseDeleteButtonClicked(self):
-        print("studentDeleteButtonClicked")
 
     @pyqtSlot()
     def backButtonClicked(self) -> None:
