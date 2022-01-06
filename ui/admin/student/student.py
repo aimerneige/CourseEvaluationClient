@@ -318,7 +318,7 @@ class StudentMainWindow(QMainWindow):
             QMessageBox.warning(self, "Error", response.json()['data'])
             return
         QMessageBox.information(
-            self, "Success", "Save New Student Successfully.")
+            self, "Success", "Save Student Successfully.")
         self.updateUI()
 
     @pyqtSlot()
