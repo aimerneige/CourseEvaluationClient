@@ -57,8 +57,10 @@ class CreateEvaluationWindow(QMainWindow):
         self.comboBox.clear()
         api = Api()
         response = api.get_all_course()
+        if response.json()['message'] == "not found":
+            return
         if response.json()['message'] != 'success':
-            QMessageBox.warning(self, "Error", "Failed to get course list")
+            QMessageBox.warning(self, "Error", response.json()['message'])
             return
         course_list = response.json()['data']
         for course in course_list:

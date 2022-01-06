@@ -174,6 +174,8 @@ class StudentMainWindow(QMainWindow):
         self.studentList.clear()
         api = Api()
         response = api.get_all_student()
+        if response.json()['message'] == "not found":
+            return
         if response.json()['message'] != "success":
             QMessageBox.warning(self, "Error", response.json()['data'])
             return

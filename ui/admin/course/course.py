@@ -140,6 +140,8 @@ class CourseMainWindow(QMainWindow):
         self.courseList.clear()
         api = Api()
         response = api.get_all_course()
+        if response.json()["message"] == "not found":
+            return
         if response.json()['message'] != 'success':
             QMessageBox.warning(self, "Error", response.json()['data'])
             return
@@ -153,6 +155,8 @@ class CourseMainWindow(QMainWindow):
         self.teacherComb.clear()
         api = Api()
         response = api.get_all_teacher()
+        if response.json()['message'] == 'not found':
+            return
         if response.json()['message'] != 'success':
             QMessageBox.warning(self, "Error", response.json()['data'])
             return
@@ -169,6 +173,8 @@ class CourseMainWindow(QMainWindow):
         course_id = g_course_list[course_index]['id']
         api = Api()
         response = api.get_all_students_by_course_id(course_id)
+        if response.json()['message'] == 'not found':
+            return
         if response.json()['message'] != 'success':
             QMessageBox.warning(self, "Error", response.json()['data'])
             return
