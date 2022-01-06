@@ -181,7 +181,7 @@ class StudentRegisterWindow(QMainWindow):
             QMessageBox.warning(self, "Warning", "Please input verify code.")
             return
         api = Api()
-        response = api.create_new_student(
+        response = api.register_new_student(
             id_number, name, phone, sex, email, password, age, verify_code)
         if response.json()['message'] == 'success':
             QMessageBox.information(self, "Success", "Register successful.")
