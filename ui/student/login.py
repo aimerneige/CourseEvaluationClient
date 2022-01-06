@@ -10,6 +10,7 @@ from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QLabel, QLineEdit, QMainWindow, QMessageBox, QPushButton
 
 from net.api import Api
+from ui.student.main import StudentMainWindow
 from ui.student.register import StudentRegisterWindow
 
 
@@ -90,7 +91,8 @@ class StudentLoginWindow(QMainWindow):
         if response.json()['message'] == 'success':
             self.studentId = response.json()['data']['id']
             self.close()
-            # start student main window
+            self.studentMainWindow = StudentMainWindow(self)
+            self.studentMainWindow.show()
         else:
             QMessageBox.warning(self, 'Error', response.json()['data'])
 
