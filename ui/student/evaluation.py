@@ -15,6 +15,30 @@ window_height = 140
 
 button_size = QSize(100, 30)
 
+question_content_list = [
+    "PPT 的设计与制作",
+    "教学工具",
+    "教材及参考资料",
+    "教案",
+    "PPT的使用与板书",
+    "为人师表",
+    "学生出勤与课堂纪律",
+    "对课堂的把控能力",
+    "教学方法",
+    "案例教学或习题课",
+    "讲授内容",
+    "讲授进度",
+    "语言表达",
+    "课程思政",
+    "持续改进",
+    "辅导答疑",
+    "作业内容",
+    "作业布置",
+    "作业批改",
+    "考核内容",
+    "考核方式"
+]
+
 
 class StudentEvaluationWindow(QMainWindow):
     def __init__(self, father):

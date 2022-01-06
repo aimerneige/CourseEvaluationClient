@@ -63,6 +63,8 @@ class StudentMainWindow(QMainWindow):
         self.evaluationList.clear()
         api = Api()
         response = api.get_all_evaluation_by_student_id(self.studentId)
+        if response.json()['message'] == 'not found':
+            return
         if response.json()['message'] != 'success':
             QMessageBox.warning(self, "Error", response.json()['data'])
             return
@@ -76,10 +78,10 @@ class StudentMainWindow(QMainWindow):
                 return
             course = course_response.json()['data']
             g_evaluation_list.append(evaluation)
-            self.evaluationList.insertItem(evaluation['id'], course['name'])
+            self.evaluationList.insertItem(evaluation['id'], course['title'])
 
     @pyqtSlot()
-    def evaluationListClicked(self, item):
+    def evaluationListClicked(self):
         index = self.evaluationList.currentRow()
         evaluation_id = g_evaluation_list[index]['id']
         self.evaluationId = evaluation_id
