@@ -9,6 +9,7 @@ from PyQt5.QtCore import QSize, pyqtSlot, reset
 from PyQt5.QtWidgets import QDesktopWidget, QLabel, QListWidget, QMainWindow, QMessageBox, QPlainTextEdit, QPushButton, QSpinBox
 
 from net.api import Api
+from ui.admin.evaluation.create import CreateEvaluationWindow
 
 
 window_title = "Evaluation Manage"
@@ -158,7 +159,9 @@ class EvaluationMainWindow(QMainWindow):
 
     @pyqtSlot()
     def courseNewButtonClicked(self):
-        pass
+        self.close()
+        self.createEvaluationWindow = CreateEvaluationWindow(self)
+        self.createEvaluationWindow.show()
 
     @pyqtSlot()
     def courseListClicked(self):
