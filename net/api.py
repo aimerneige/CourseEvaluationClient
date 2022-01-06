@@ -208,7 +208,20 @@ class Api():
         response = requests.get(self.student_url)
         return response
 
-    def create_new_student(self, id_number, name, phone, sex, email, password, age, verify_code):
+    def create_new_student(self, id_number, name, phone, sex, email, password, age):
+        data = {
+            "idNumber": id_number,
+            "name": name,
+            "phone": phone,
+            "sex": sex,
+            "email": email,
+            "password": password,
+            "age": age
+        }
+        response = s.post(self.student_url, json=data)
+        return response
+
+    def register_new_student(self, id_number, name, phone, sex, email, password, age, verify_code):
         data = {
             "idNumber": id_number,
             "name": name,
@@ -219,7 +232,7 @@ class Api():
             "age": age,
             "verifyCode": verify_code
         }
-        response = s.post(self.student_url, json=data)
+        response = s.post(self.student_url + '/register', json=data)
         return response
 
     def get_student_by_id(self, id):
