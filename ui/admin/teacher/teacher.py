@@ -6,7 +6,7 @@
 
 import re
 
-from PyQt5.QtCore import QSize, pyqtSlot
+from PyQt5.QtCore import QSize, pyqtSlot, reset
 from PyQt5.QtWidgets import QComboBox, QDesktopWidget, QLabel, QLineEdit, QListWidget, QMainWindow, QMessageBox, QPushButton, QSpinBox
 from requests.models import Response
 
@@ -18,6 +18,7 @@ window_width = 750
 window_height = 250
 
 g_teacher_list = []
+g_course_list = []
 
 
 class TeacherMainWindow(QMainWindow):
@@ -157,6 +158,21 @@ class TeacherMainWindow(QMainWindow):
             g_teacher_list.append(teacher)
             self.teacherList.insertItem(teacher['id'], teacher['name'])
 
+    def updateCourseData(self, teacher_id):
+        g_course_list.clear()
+        self.courseList.clear()
+        api = Api()
+        response = api.get_all_course_by_teacher_id(teacher_id)
+        if response.json()['message'] == 'not found':
+            return
+        if response.json()['message'] != "success":
+            QMessageBox.warning(self, "Error", response.json()['data'])
+            return
+        course_list = response.json()['data']
+        for course in course_list:
+            g_course_list.append(course)
+            self.courseList.insertItem(course['id'], course['title'])
+
     @pyqtSlot()
     def teacherListClicked(self):
         index = self.teacherList.currentRow()
@@ -172,6 +188,7 @@ class TeacherMainWindow(QMainWindow):
         self.phoneInput.setText(teacher['phone'])
         self.sexInput.setCurrentText(teacher['sex'])
         self.ageInput.setValue(teacher['age'])
+        self.updateCourseData(teacher_id)
 
     @pyqtSlot()
     def searchButtonClicked(self):
