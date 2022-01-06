@@ -88,6 +88,7 @@ class CreateEvaluationWindow(QMainWindow):
                     self, "Error", evaluation_response.json()['data'])
                 return
         QMessageBox.information(self, "Success", "Evaluation created")
+        self.father.updateEvaluationList()
 
     @pyqtSlot()
     def cancelButtonClicked(self):

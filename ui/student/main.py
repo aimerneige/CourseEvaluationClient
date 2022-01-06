@@ -9,7 +9,7 @@ from PyQt5.QtCore import QSize, pyqtSlot
 from PyQt5.QtWidgets import QDesktopWidget, QLabel, QListWidget, QMainWindow, QMessageBox, QPushButton
 
 from net.api import Api
-from ui.student.evaluation import StudentEvaluationWindow
+from ui.student.question import StudentQuestionWindow
 
 
 window_title = "Student Main"
@@ -70,6 +70,8 @@ class StudentMainWindow(QMainWindow):
             return
         evaluation_list = response.json()['data']
         for evaluation in evaluation_list:
+            if len(evaluation['questionIds']) != 0:
+                continue
             course_id = evaluation['courseId']
             course_response = api.get_course_by_id(course_id)
             if course_response.json()['message'] != 'success':
@@ -89,7 +91,7 @@ class StudentMainWindow(QMainWindow):
     @pyqtSlot()
     def startButtonClicked(self):
         self.close()
-        self.studentEvaluationWindow = StudentEvaluationWindow(self)
+        self.studentEvaluationWindow = StudentQuestionWindow(self)
         self.studentEvaluationWindow.show()
 
     @pyqtSlot()

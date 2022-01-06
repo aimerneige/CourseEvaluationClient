@@ -70,14 +70,16 @@ class EvaluationMainWindow(QMainWindow):
         self.questionList.clicked.connect(self.questionListClicked)
 
     def initAnswerWidgets(self):
-        self.markLabel = QLabel("Mark:", self)
-        self.markLabel.setFixedSize(QSize(80, 30))
-        self.markLabel.move(430, 10)
+        self.scoreLabel = QLabel("Score:", self)
+        self.scoreLabel.setFixedSize(QSize(80, 30))
+        self.scoreLabel.move(430, 10)
 
-        self.markValue = QSpinBox(self)
-        self.markValue.setReadOnly(True)
-        self.markValue.setFixedSize(QSize(80, 30))
-        self.markValue.move(510, 10)
+        self.scoreValue = QSpinBox(self)
+        self.scoreValue.setReadOnly(True)
+        self.scoreValue.setFixedSize(QSize(80, 30))
+        self.scoreValue.setMaximum(100)
+        self.scoreValue.setMinimum(0)
+        self.scoreValue.move(510, 10)
 
         self.praiseLabel = QLabel("Praise:", self)
         self.praiseLabel.setFixedSize(QSize(80, 30))
@@ -150,6 +152,14 @@ class EvaluationMainWindow(QMainWindow):
         evaluation_index = self.evaluationList.currentRow()
         evaluation_id = g_evaluation_list[evaluation_index]["id"]
         self.updateQuestionList(evaluation_id)
+        api = Api()
+        praise_response = api.get_praise_by_evaluation_id(evaluation_id)
+        if praise_response.json()['message'] != 'success':
+            QMessageBox.warning(
+                self, "Error", praise_response.json()['data'])
+            return
+        praise = praise_response.json()['data']
+        self.praiseText.setPlainText(praise["content"])
 
     @pyqtSlot()
     def questionListClicked(self):
@@ -161,15 +171,7 @@ class EvaluationMainWindow(QMainWindow):
             QMessageBox.warning(self, "Warning", response.json()["data"])
             return
         question = response.json()["data"]
-        self.markValue.setValue(question["score"])
-        evaluation_id = g_question_list[index]["evaluationId"]
-        praise_response = api.get_praise_by_evaluation_id(evaluation_id)
-        if praise_response.json()['message'] != 'success':
-            QMessageBox.warning(
-                self, "Error", praise_response.json()['data'])
-            return
-        praise = praise_response.json()['data']
-        self.praiseText.setPlainText(praise["content"])
+        self.scoreValue.setValue(question["score"])
 
     @pyqtSlot()
     def backButtonClicked(self) -> None:
