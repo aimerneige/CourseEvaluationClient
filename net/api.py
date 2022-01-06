@@ -184,6 +184,11 @@ class Api():
         response = requests.delete(self.praise_url + '/' + str(id))
         return response
 
+    def get_praise_by_evaluation_id(self, evaluation):
+        response = requests.get(
+            self.praise_url + '/evaluation', params={'evaluationId': evaluation})
+        return response
+
     def get_all_question(self):
         response = requests.get(self.question_url)
         return response
@@ -212,6 +217,11 @@ class Api():
 
     def delete_question_by_id(self, id):
         response = requests.delete(self.question_url + '/' + str(id))
+        return response
+
+    def get_all_question_by_evaluation_id(self, evaluation_id):
+        response = requests.get(
+            self.question_url + '/evaluation', params={'evaluationId': evaluation_id})
         return response
 
     def get_all_student(self):
