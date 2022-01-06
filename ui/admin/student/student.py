@@ -7,7 +7,7 @@
 import re
 
 from PyQt5.QtCore import QSize, pyqtSlot
-from PyQt5.QtWidgets import QComboBox, QDesktopWidget, QLabel, QLineEdit, QListWidget, QMainWindow, QMessageBox, QPlainTextEdit, QPushButton, QSpinBox
+from PyQt5.QtWidgets import QComboBox, QDesktopWidget, QLabel, QLineEdit, QListWidget, QMainWindow, QMessageBox, QPushButton, QSpinBox
 from requests.models import Response
 
 from net.api import Api
@@ -272,7 +272,8 @@ class StudentMainWindow(QMainWindow):
         if response.json()['message'] != 'success':
             QMessageBox.warning(self, "Error", response.json()['data'])
             return
-        QMessageBox.information(self, "Success", "Register successful.")
+        QMessageBox.information(
+            self, "Success", "Create new student successfully.")
         self.updateStudentData()
 
     @pyqtSlot()
