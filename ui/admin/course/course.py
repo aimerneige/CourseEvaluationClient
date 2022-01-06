@@ -280,6 +280,8 @@ class CourseMainWindow(QMainWindow):
         if response.json()['message'] != 'success':
             QMessageBox.warning(self, "Error", response.json()['data'])
             return
+        QMessageBox.information(
+            self, "Success", "Delete Course Successfully.")
         self.updateUI()
 
     @pyqtSlot()
