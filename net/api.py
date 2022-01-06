@@ -113,6 +113,11 @@ class Api():
             self.course_url + '/' + str(course_id) + '/student', params={'studentId': student_id})
         return response
 
+    def get_all_course_by_student_id(self, student_id):
+        response = requests.get(
+            self.course_url + '/student/', params={'studentId': student_id})
+        return response
+
     def search_course_by_title(self, title):
         response = requests.get(
             self.course_url + '/search', params={'title': title})

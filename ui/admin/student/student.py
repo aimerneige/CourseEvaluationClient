@@ -18,6 +18,7 @@ window_width = 750
 window_height = 330
 
 g_student_list = []
+g_course_list = []
 
 
 class StudentMainWindow(QMainWindow):
@@ -173,6 +174,21 @@ class StudentMainWindow(QMainWindow):
             g_student_list.append(student)
             self.studentList.insertItem(student['id'], student['name'])
 
+    def updateCourseData(self, student_id):
+        g_course_list.clear()
+        self.courseList.clear()
+        api = Api()
+        response = api.get_all_course_by_student_id(student_id)
+        if response.json()['message'] == 'not found':
+            return
+        if response.json()['message'] != "success":
+            QMessageBox.warning(self, "Error", response.json()['data'])
+            return
+        course_list = response.json()['data']
+        for course in course_list:
+            g_course_list.append(course)
+            self.courseList.insertItem(course['id'], course['title'])
+
     @pyqtSlot()
     def studentListClicked(self):
         index = self.studentList.currentRow()
@@ -190,6 +206,7 @@ class StudentMainWindow(QMainWindow):
         self.emailInput.setText(student['email'])
         self.passwordInput.setText("")
         self.ageInput.setValue(student['age'])
+        self.updateCourseData(student_id)
 
     @pyqtSlot()
     def searchButtonClicked(self):
