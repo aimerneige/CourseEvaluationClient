@@ -68,7 +68,26 @@ class CreateEvaluationWindow(QMainWindow):
 
     @pyqtSlot()
     def confirmButtonClicked(self):
-        pass
+        if self.comboBox.currentIndex() == -1:
+            QMessageBox.warning(self, "Error", "Please select a course")
+            return
+        course_index = self.comboBox.currentIndex()
+        course_id = g_course_list[course_index]['id']
+        api = Api()
+        student_response = api.get_all_students_by_course_id(course_id)
+        if student_response.json()['message'] != 'success':
+            QMessageBox.warning(self, "Error", student_response.json()['data'])
+            return
+        student_list = student_response.json()['data']
+        for student in student_list:
+            student_id = student['id']
+            evaluation_response = api.create_new_evaluation(
+                student_id, course_id)
+            if evaluation_response.json()['message'] != 'success':
+                QMessageBox.warning(
+                    self, "Error", evaluation_response.json()['data'])
+                return
+        QMessageBox.information(self, "Success", "Evaluation created")
 
     @pyqtSlot()
     def cancelButtonClicked(self):
