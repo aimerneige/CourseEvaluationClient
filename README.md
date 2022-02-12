@@ -6,6 +6,10 @@
 
 PyQt client for university course evaluation.
 
+## Server
+
+<https://github.com/aimerneige/CourseEvaluation>
+
 ## LICENSE
 
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
