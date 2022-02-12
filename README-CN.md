@@ -4,6 +4,10 @@
 
 大学教学评课系统客户端，PyQt 编写。
 
+## 后端
+
+<https://github.com/aimerneige/CourseEvaluation>
+
 ## 开源协议
 
 <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">
